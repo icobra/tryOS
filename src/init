@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
+int main()
+{
+
+    sleep(2); // we need this to wait before os loaded
+    printf("\n");
+
+    /* Loop forever (or till we hit the break statement) */
+    while (1) {
+        pid_t child_pid;
+        pid_t tpid;
+        int child_status;
+
+        char cmd[100];
+        char *argv[] = {NULL};
+        printf("\n>  ");
+        scanf("%s", cmd);
+
+        child_pid = fork();
+        if(child_pid == 0) {
+            /* This is done by the child process. */
+
+            execv(cmd, argv);
+    
+            /* If execv returns, it must have failed. */
+
+            printf("Unknown command\n");
+    
+            }
+        else {
+            /* This is run by the parent.  Wait for the child
+            to terminate. */
+
+            do {
+            pid_t tpid = wait(&child_status);
+    
+            } while(tpid != child_pid);
+        }
+     
+    }
+    return (0);
+}

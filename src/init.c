@@ -1,10 +1,16 @@
-#include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
 
 int main() {
-  sleep(2); // we need this to wait before os loaded
-  printf("\n");
-  printf("Hello, Linux world!\n"); 
-  while (1) {}
-  return 0;
+   char *argv[] = {NULL};
+   char *env[] = {NULL};
+
+   pid_t pid;
+   pid = fork();
+
+   if (pid == 0) {
+     execve("/sh", argv, env);
+   } else {
+     while (1) { sleep(1); }
+   }
 }
