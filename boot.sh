@@ -1,1 +1,1 @@
-qemu-system-i386  -kernel ./static/vmlinuz -initrd initrd.gz
+qemu-system-i386  -kernel ./static/bzImage2 -initrd initrd.gz
