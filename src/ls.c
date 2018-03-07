@@ -1,20 +1,15 @@
-#include <apue.h>
-#include <dirnet.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <dirent.h>
 
-int main(int argc, char *argv[])
+int main(int argc, char **argv)
 {
-    DIR *dp;
-    struct dirnet *dirp;
+    DIR            *dptr;
+    struct dirent  *ds;
+    dptr = opendir(".");
+    while ((ds = readdir(dptr)) != 0)
+        printf("%s\n", ds->d_name);
+    closedir(dptr);
 
-    if (argc != 2){
-        err_quit("Использование: ls имя_каталога");
-    }
-    if ((dp = opendir(argv[1] == NULL) {
-        err_sys("Невозможно открыть %s", argv[1]);
-    }
-    while ((dirp = readdir(dp) != NULL)) {
-        printf("%s\n", dirp->d_name);
-    }
-    closedir(dp);
-    exit(0);
+    return(0);
 }
